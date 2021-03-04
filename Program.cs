@@ -3,94 +3,58 @@ using System.Collections.Generic;
 
 namespace Classes
 {
-    public class Customer
-    {
-        // Public Properties
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public bool IsLocal { get; set; }
-
-        public string FullName
-        {
-            get
-            {
-                return $"{FirstName} {LastName}";
-            }
-        }
-    }
-
-    public class DeliveryService
-    {
-        /*
-          Properties
-        */
-        public string Name { get; set; }
-
-        public string TransitType { get; set; }
-
-        /*
-          Methods
-        */
-        public void Deliver(Product product, Customer customer)
-        {
-            Console.WriteLine($"Product delivered by {TransitType} to {customer.FullName}");
-        }
-    }
-
-    public class Product
-    {
-        /*
-          Properties
-        */
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
-        public double Price { get; set; }
-
-        public int Quantity { get; set; }
-
-        /*
-          Methods
-        */
-        public void Ship(Customer customer, DeliveryService service)
-        {
-            if (!customer.IsLocal)
-            {
-                service.Deliver(this, customer);
-            }
-        }
-    }
-
     class Program
     {
         static void Main(string[] args)
         {
-            Product tinkerToys = new Product()
-            {
-                Title = "Tinker Toys",
-                Description = "You can build anything you want",
-                Price = 32.49,
-                Quantity = 25
-            };
+            // Create an instance of a company. Name it whatever you like.
+            DateTime founded = new DateTime(1999, 12, 1);
+            Company CatsInc = new Company("Cats Inc.", founded);
 
-            Customer marcus = new Customer()
+            // Create three employees
+            Employee lemon = new Employee()
             {
-                FirstName = "Marcus",
-                LastName = "Fulbright",
-                IsLocal = false
-            };
+                FirstName = "Liz",
+                LastName = "Lemon",
+                Title = "Perimeter Specialist",
+                StartDate = new DateTime(2020, 3, 12)
 
-            DeliveryService UPS = new DeliveryService()
+            };
+            Employee loretta = new Employee()
             {
-                Name = "UPS",
-                TransitType = "train"
-            };
+                FirstName = "Loretta",
+                LastName = "Dink",
+                Title = "Sunlight Analyst",
+                StartDate = new DateTime(2012, 4, 2),
 
-            // Ship the tinker toys to Marcus using UPS
-            tinkerToys.Ship(marcus, UPS);
+            };
+            Employee birdie = new Employee()
+            {
+                FirstName = "Birdie",
+                LastName = "Doza",
+                Title = "Miinister of Napping",
+                StartDate = new DateTime(2001, 5, 18),
+
+            };
+            List<Employee> assignEmployees = new List<Employee>()
+            {
+                birdie, lemon, loretta
+            };
+            // Assign the employees to the company
+            CatsInc.CurrentEmployees = assignEmployees;
+
+            /*
+                Iterate the company's employee list and generate the
+                simple report shown above
+            */
+
+            foreach (Employee cat in CatsInc.CurrentEmployees)
+            {
+                Console.WriteLine($"{cat.FirstName} {cat.LastName} works for {CatsInc.Name} as {cat.Title} since {cat.StartDate} ");
+            }
+
+
+
         }
     }
 }
