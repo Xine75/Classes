@@ -1,7 +1,12 @@
 using System;
+//this is necessary to access List class/type
 using System.Collections.Generic;
+//same Namespace across all files for data accessibility
 namespace Classes
 {
+    /*creating a custom type "Company" with 2 properties. These properties
+   will be used in Program.cs to create a company
+   */
     public class Company
     {
 
@@ -20,6 +25,7 @@ namespace Classes
 
             The constructor will set the value of the public properties
         */
+        //constructor to create a company "object"
         public Company(string nameOfCompany, DateTime createdOn)
         {
             Name = nameOfCompany;
